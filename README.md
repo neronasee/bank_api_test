@@ -1,3 +1,3 @@
 # Bank Test Service
 
-sequelize db:migrate -> npm install -> npm start
+restore from db dump -> npm install -> npm start
