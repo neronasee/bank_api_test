@@ -5,6 +5,8 @@
   },
   "rules": {
     "require-jsdoc": 0,
-    "camelcase": 0
+    "camelcase": 0,
+    "quotes": 0,
+    "max-len": 0
   }
 }

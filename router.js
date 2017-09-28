@@ -5,13 +5,16 @@ const usersController = require('./controllers').users;
 const frontPage = require('./routes/frontpage');
 
 module.exports = (app) => {
-  app.get('/', frontPage);
+  app.get('/', frontPage.get);
+  app.post('/', frontPage.post);
+
 
   app.post('/customer', customersController.create);
   app.get('/transaction/:customerId/:transactionId', cache.route(), transactionsController.getSingle);
-  app.get('/transaction/:customerId/:amount/:offset/:limit',
-    cache.route(),
-    transactionsController.getByFilter);
+
+  // transaction/:customerId?amount=100&date=2017-12-25&offset=10&limit=2
+  app.get('/transaction/:customerId', cache.route(), transactionsController.getByFilter);
+
   app.put('/transaction/:transactionId/:amount', transactionsController.update);
   app.delete('/transaction/:transactionId', transactionsController.delete);
   app.post('/:customerId/transaction', transactionsController.create);

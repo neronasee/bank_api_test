@@ -8,7 +8,7 @@ const session = require('express-session');
 
 const app = express();
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 
 app.use(logger('combined', {stream: accessLogStream}));
 
@@ -20,6 +20,7 @@ app.use(session({
   cookie: {signed: false},
   resave: false,
 }));
+app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('view engine', 'pug');

@@ -1,14 +1,13 @@
-const Customer = require('../models').Customer;
+const customer = require('../db').customer;
 
 module.exports = {
   create(req, res) {
-    return Customer
-      .create({
-        name: req.body.name,
-        cnp: req.body.cnp,
-      })
-      .then((customer) => {
-        res.status(201).send({customerId: customer.dataValues.id});
+    const {name, cnp} = req.body;
+
+    return customer
+      .create(name, cnp)
+      .then((result) => {
+        res.status(201).send({customerId: result.insertId});
       })
       .catch((error) => res.status(400).send(error));
   },
